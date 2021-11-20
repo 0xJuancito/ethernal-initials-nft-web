@@ -3,10 +3,10 @@ import twitterLogo from './assets/twitter-logo.svg';
 import React from "react";
 
 // Constants
-const TWITTER_HANDLE = '_buildspace';
+const TWITTER_HANDLE = 'juancito.eth';
 const TWITTER_LINK = `https://twitter.com/${TWITTER_HANDLE}`;
-const OPENSEA_LINK = '';
-const TOTAL_MINT_COUNT = 50;
+const OPENSEA_LINK = 'https://opensea.io/collection/ethernal-initials';
+const TOTAL_MINT_COUNT = 776;
 
 const App = () => {
   // Render Methods
@@ -20,9 +20,9 @@ const App = () => {
     <div className="App">
       <div className="container">
         <div className="header-container">
-          <p className="header gradient-text">My NFT Collection</p>
+          <p className="header gradient-text">Ethernal Initials</p>
           <p className="sub-text">
-            Each unique. Each beautiful. Discover your NFT today.
+          An initials pair from AA to ZZ, and 00 to 99 that will live for eternity in this realm.
           </p>
           {renderNotConnectedContainer()}
         </div>
@@ -33,7 +33,7 @@ const App = () => {
             href={TWITTER_LINK}
             target="_blank"
             rel="noreferrer"
-          >{`built on @${TWITTER_HANDLE}`}</a>
+          >{`built with ❤️ by ${TWITTER_HANDLE}`}</a>
         </div>
       </div>
     </div>
