@@ -35,6 +35,36 @@
   -webkit-text-fill-color: transparent;
 }
 
+.cta-p {
+  color: white;
+}
+
+.cta-a {
+  color: white;
+}
+
+.cta-img {
+  width: 300px;
+}
+
+.cta-input-container {
+  margin-bottom: 25px;
+}
+
+.cta-label {
+  color: white;
+  margin-right: 10px;
+
+}
+
+.cta-input {
+  width: 30px;
+  height: 30px;
+  text-transform: uppercase;
+  text-align: center;
+  font-weight: 800;
+}
+
 .cta-button {
   height: 45px;
   border: 0;
