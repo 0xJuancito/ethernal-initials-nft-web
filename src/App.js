@@ -269,7 +269,7 @@ const App = () => {
             href={TWITTER_LINK}
             target="_blank"
             rel="noreferrer"
-          >{`built with ❤️ by ${TWITTER_HANDLE}`}</a>
+          >{`built with buildspace by ${TWITTER_HANDLE}`}</a>
         </div>
       </div>
     </div>
