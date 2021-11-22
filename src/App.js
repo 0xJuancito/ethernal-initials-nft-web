@@ -68,12 +68,6 @@ const App = () => {
         // If you're familiar with webhooks, it's very similar to that!
         connectedContract.on("NewInitialsNFTMinted", async (from, tokenId) => {
           console.log(from, tokenId.toNumber())
-
-          // const tokenURI = await connectedContract.tokenURI(tokenId.toNumber())
-          // const tokenURIBase64 = tokenURI.split(',')[1]
-          // const parsedTokenURI = JSON.parse(Buffer.from(tokenURIBase64, 'base64').toString())
-          // console.log(parsedTokenURI.image)
-          // imgRef.current.src = parsedTokenURI.image
           // alert(`Hey there! We've minted your NFT and sent it to your wallet. It may be blank right now. It can take a max of 10 min to show up on OpenSea. Here's the link: ${OPENSEA_ITEM_LINK}/${CONTRACT_ADDRESS}/${tokenId.toNumber()}`)
         });
 
@@ -158,8 +152,20 @@ const App = () => {
         const signer = provider.getSigner();
         const connectedContract = new ethers.Contract(CONTRACT_ADDRESS, EthernalInitials.abi, signer);
 
-        console.log("Going to pop wallet now to pay gas...")
         const tokenId = getTokenIdFromInitials(initials)
+        try {
+          const owner = await connectedContract.ownerOf(tokenId)
+          if (owner) {
+            alert('This token has already been minted. Please choose another one.')
+            buttonRef.current.disabled = false
+            buttonRef.current.innerText = 'Mint NFT'
+            return
+          }
+        } catch (err) {
+          console.log(err)
+        }
+        
+        console.log("Going to pop wallet now to pay gas...")
         const options = { gasLimit: 100000 };
         let nftTxn = await connectedContract.mintNFT(tokenId, options);
 
@@ -172,22 +178,23 @@ const App = () => {
         pRef.current.innerHTML = `We've minted your NFT and sent it to your wallet. It can take some minutes to show up on <a className="cta-a" target="_blank" href="${OPENSEA_ITEM_LINK}/${CONTRACT_ADDRESS}/${tokenId}">OpenSea</a>. Meanwhile, you can take a look at the rest of the <a target="_blank" href="${OPENSEA_LINK}">collection</a>, or check the transaction on <a className="cta-a" target="_blank" href="${POLYGON_SCAN_LINK}/${nftTxn.hash}">PolygonScan</a>.`
         buttonRef.current.innerText = 'Your NFT has been Minted!'
 
-        const tokenURI = await connectedContract.tokenURI(tokenId)
-        const tokenURIBase64 = tokenURI.split(',')[1]
-        const parsedTokenURI = JSON.parse(Buffer.from(tokenURIBase64, 'base64').toString())
-        console.log(parsedTokenURI.image)
-        imgRef.current.src = parsedTokenURI.image
+        // The tokenURI may not be available at the time
+        try {
+          const tokenURI = await connectedContract.tokenURI(tokenId)
+          const tokenURIBase64 = tokenURI.split(',')[1]
+          const parsedTokenURI = JSON.parse(Buffer.from(tokenURIBase64, 'base64').toString())
+          console.log(parsedTokenURI.image)
+          imgRef.current.src = parsedTokenURI.image
+        } catch (err) {
+          console.log(err)
+        }
 
         return
       } else {
         console.log("Ethereum object doesn't exist!");
       }
     } catch (error) {
-      if (error?.data?.code === 3) {
-        alert('This token has already been minted. Please try with another one')
-      } else {
-        alert('There was an error and the NFT could not be minted')
-      }
+      alert('There was an error and the NFT could not be minted')
       console.log(error)
     }
     pRef.current.innerHTML = ""
