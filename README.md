@@ -2,6 +2,9 @@
 
 An initials pair from AA to ZZ, and 00 to 99 that will live for eternity in this realm.
 
+![image](https://user-images.githubusercontent.com/12957692/142917924-5f710e90-824f-4b3d-83ab-c2f0ec96575f.png)
+
+
 ### **Welcome 👋**
 
 You can see the collection on [OpenSea](https://opensea.io/collection/ethernal-initials)
