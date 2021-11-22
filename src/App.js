@@ -147,7 +147,7 @@ const App = () => {
           parseInt(ethereum.networkVersion, 10)
         );
         if (network.chainId !== CHAIN_ID) {
-          alert('Please switch to the network to Polygon/Matic')
+          alert('Please switch to the Polygon/Matic network')
           buttonRef.current.disabled = false
           buttonRef.current.innerText = 'Mint NFT'
           return
