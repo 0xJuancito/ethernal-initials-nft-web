@@ -166,7 +166,7 @@ const App = () => {
         }
         
         console.log("Going to pop wallet now to pay gas...")
-        const options = { gasLimit: 100000 };
+        const options = { gasLimit: 150000 };
         let nftTxn = await connectedContract.mintNFT(tokenId, options);
 
         console.log("Minting...please wait.")
